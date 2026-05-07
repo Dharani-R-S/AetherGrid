@@ -1,0 +1,23 @@
+{
+  "name": "dynamic-urban-waste-system",
+  "version": "1.0.0",
+  "description": "AI-powered dynamic urban waste collection system",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev:client": "vite --config frontend/vite.config.mjs",
+    "dev:server": "node backend/server.js",
+    "build": "vite build --config frontend/vite.config.mjs",
+    "preview": "vite preview --config frontend/vite.config.mjs",
+    "start": "node backend/server.js",
+    "start:backend": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.8"
+  }
+}
