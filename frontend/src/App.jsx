@@ -40,7 +40,7 @@ function App() {
   const abortRef = useRef(null);
   const requestIdRef = useRef(0);
 
-  async function loadDashboard(base = "https://aethergrid-1.onrender.com/api/dashboard", silent = false, sc = activeScenario) {
+  async function loadDashboard(base = `${import.meta.env.VITE_API_BASE_URL}/dashboard`, silent = false, sc = activeScenario) {
     requestIdRef.current += 1;
     const rid = requestIdRef.current;
     abortRef.current?.abort();
@@ -63,8 +63,8 @@ function App() {
     }
   }
 
-  useEffect(() => { loadDashboard("https://aethergrid-1.onrender.com/api/dashboard", false, activeScenario); return () => abortRef.current?.abort(); }, [activeScenario]);
-  useEffect(() => { if (!autoRefresh || activeTimeline !== "now") return; const t = setInterval(() => loadDashboard("https://aethergrid-1.onrender.com/api/dashboard", true, activeScenario), 5000); return () => clearInterval(t); }, [autoRefresh, activeScenario, activeTimeline]);
+  useEffect(() => { loadDashboard(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, false, activeScenario); return () => abortRef.current?.abort(); }, [activeScenario]);
+  useEffect(() => { if (!autoRefresh || activeTimeline !== "now") return; const t = setInterval(() => loadDashboard(`${import.meta.env.VITE_API_BASE_URL}/dashboard`, true, activeScenario), 5000); return () => clearInterval(t); }, [autoRefresh, activeScenario, activeTimeline]);
 
   const timelineState = useMemo(() => { const items = Array.isArray(data?.timeline) ? data.timeline : []; return items.find(i => i.key === activeTimeline) || items[0] || null; }, [activeTimeline, data]);
   const safeSnapshot = useMemo(() => normalizeSnapshot(timelineState?.snapshot || data), [data, timelineState]);
